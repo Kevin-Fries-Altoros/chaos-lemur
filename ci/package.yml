@@ -10,5 +10,8 @@ image_resource:
 inputs:
 - name: chaos-lemur
 
+outputs:
+- name: chaos-lemur-deploy
+
 run:
   path: chaos-lemur/ci/package.sh
