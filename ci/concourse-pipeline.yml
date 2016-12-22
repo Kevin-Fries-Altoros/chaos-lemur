@@ -33,7 +33,7 @@ jobs:
       run:
         path: chaos-lemur/ci/package.sh
     - put: pcf-app
-        inputs:
-          - name: chaos-lemur-deploy
-        params:
-          manifest: chaos-lemur-deploy/manifest.yml
+      inputs:
+        - name: chaos-lemur-deploy
+      params:
+        manifest: chaos-lemur-deploy/manifest.yml
