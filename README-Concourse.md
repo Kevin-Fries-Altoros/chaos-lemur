@@ -1,29 +1,29 @@
 # chaos-lemur-pipeline
 ---
 
-This code will deploy the Chaos Lemur stress testing tools into the CloudFoundry environment.
+This code will deploy the Chaos Lemur stress testing tools into the Cloud Foundry environment.
 
 ## Prerequisites
 ---
 
-  - GIT
+  - Git
   - Concourse
 
 ## How to use this pipeline
 ---
 
-Within these instructions, we will assume that your CloudFoundry instance is 10.11.12.13, please adjust this to your actual CF instance IP.
+Within these instructions, we will assume that your Cloud Foundry instance is 10.11.12.13, please adjust this to your actual CF instance IP.
 
-  1. Checkout pipeline code from GIT
+  1. Checkout pipeline code from Git
 
   ```bash
-  $ git clone git@gitlab.vmware.com:gitlab-user/chaos-lemur-pipeline
+  $ git clone git@gitlab.vmware.com:gitlab-user/chaos-lemur
   ```
 
   2. Change directory into the project's 'ci' folder
 
   ```bash
-  $ cd chaos-lemur-pipeline/ci
+  $ cd chaos-lemur/ci
   ```
 
   3. Clone a location template into a file with settings for this deployment.  Then use your favorite editor to adjust the locations and passwords appropriate for this deployment
