@@ -38,25 +38,39 @@ Within these instructions, we will assume that your Cloud Foundry instance is 10
   $ sed -i 's/my-pcf-space/pcf-space/' locations/mylocation.yml
   ```
 
-  4. Log into Concourse Instance
+  4. Create a file named env.yml that contains the running instance variables as
+     defined in [Chaos Lemur README file](README.md).
+
+     ***Example:*** *To configure chaos lemur to deploy to a local pcfdev deployment, against bosh_lite, with username/password of admin/admin*
+
+     ```yaml
+     ---
+     env:
+       DIRECTOR_HOST: 192.168.50.4
+       DIRECTOR_PASSWORD: admin
+       DIRECTOR_USERNAME: admin
+       SIMPLE_INFRASTRUCTURE: True
+     ```
+
+  5. Log into Concourse Instance
 
   ```bash
   $ cf fly - t cf1 login -c https://10.11.12.13:8080
   ```
 
-  5. Upload the pipeline to Concourse
+  6. Upload the pipeline to Concourse
 
   ```bash
   $ fly -t cf1 set-pipeline -c chaos-lemur-pipeline.yml -p deploy-chaos-lemur -l locations/mylocation.yml
   ```
 
-  6. Unpause pipeline
+  7. Unpause pipeline
 
   ```bash
   $ fly -t cf1 unpause-pipeline -p deploy-chaos-lemur  
   ```
 
-  7. Trigger the deployment job and observe the output.
+  8. Trigger the deployment job and observe the output.
 
   ```bash
   $ fly -t cf1 trigger-job -j deploy-pcf/deploy -w
