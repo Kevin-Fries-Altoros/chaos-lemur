@@ -1,13 +1,14 @@
 # chaos-lemur-pipeline
 ---
 
-This code will deploy the Chaos Lemur stress testing tools into the Cloud Foundry environment.
+This Concourse pipeline will deploy the Chaos Lemur stress testing tool into Cloud Foundry.
 
 ## Prerequisites
 ---
 
   - Git
   - Concourse
+  - Cloud Foundry
 
 ## How to use this pipeline
 ---
@@ -29,39 +30,34 @@ Within these instructions, we will assume that your Cloud Foundry instance is 10
   3. Clone a location template into a file with settings for this deployment.  Then use your favorite editor to adjust the locations and passwords appropriate for this deployment
 
   ```bash
-  $ cp locations/{loc.template,mylocation.yml}
-  $ sed -i 's/my.pcf-deployment.com/10.11.12.13/' mylocation.yml
-  $ sed -i 's/my-pcf-admin-name/admin/' mylocation.yml
-  $ sed -i 's/my-pcf-password/admin/' mylocation.yml
-  $ sed -i 's/my-pcf-organization/pcf-org/' mylocation.yml
-  $ sed -i 's/my-pcf-space/pcf-space/' mylocation.yml
+  $ cp locations/loc.template locations/mylocation.yml
+  $ sed -i 's/my.pcf-deployment.com/10.11.12.13/' locations/mylocation.yml
+  $ sed -i 's/my-pcf-admin-name/admin/' locations/mylocation.yml
+  $ sed -i 's/my-pcf-password/admin/' locations/mylocation.yml
+  $ sed -i 's/my-pcf-organization/pcf-org/' locations/mylocation.yml
+  $ sed -i 's/my-pcf-space/pcf-space/' locations/mylocation.yml
   ```
 
   4. Log into Concourse Instance
 
   ```bash
-  $ cf fly \
-    - t cf1 \
-    login \
-    -c https://10.11.12.13:8080
+  $ cf fly - t cf1 login -c https://10.11.12.13:8080
   ```
 
   5. Upload the pipeline to Concourse
 
   ```bash
-  $ fly \
-     -t cf1 \
-     set-pipeline \
-     -c chaos-lemur-pipeline.yml \
-     -p Chaos_Lemur \
-     -l locations/mylocation.yml
+  $ fly -t cf1 set-pipeline -c chaos-lemur-pipeline.yml -p deploy-chaos-lemur -l locations/mylocation.yml
   ```
 
   6. Unpause pipeline to start execution
 
   ```bash
-  $ fly \
-     -t cf1
-     unpause-pipeline
-     -p Chaos_Lemur  
+  $ fly -t cf1 unpause-pipeline -p deploy-chaos-lemur  
+  ```
+
+  7. Trigger the deployment job and observe the output.
+
+  ```bash
+  $ fly -t cf1 trigger-job -j deploy-pcf/deploy -w
   ```
