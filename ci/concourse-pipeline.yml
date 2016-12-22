@@ -19,7 +19,7 @@ jobs:
 - name: deploy-app
   plan:
     - get: chaos-lemur
-        trigger: true
+      trigger: true
     - task: build-binary
         image_resource:
           type: docker-image
