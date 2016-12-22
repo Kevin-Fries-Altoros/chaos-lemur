@@ -50,7 +50,7 @@ Within these instructions, we will assume that your Cloud Foundry instance is 10
   $ fly -t cf1 set-pipeline -c chaos-lemur-pipeline.yml -p deploy-chaos-lemur -l locations/mylocation.yml
   ```
 
-  6. Unpause pipeline to start execution
+  6. Unpause pipeline
 
   ```bash
   $ fly -t cf1 unpause-pipeline -p deploy-chaos-lemur  
