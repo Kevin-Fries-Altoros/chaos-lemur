@@ -1,0 +1,6 @@
+---
+pcf-url: https://my.pcf-deployment.com
+pcf-username: my-pcf-admin-name
+pcf-password: my-pcf-password
+pcf-organization: my-pcf-organization
+pcf-space: my-pcf-space
