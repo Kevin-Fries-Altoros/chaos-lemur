@@ -19,25 +19,21 @@ jobs:
 - name: deploy-app
   plan:
     - get: chaos-lemur
-      trigger: true
+        trigger: true
     - task: build-binary
-      image_resource:
-        type: docker-image
-        source:
-          repository: openjdk
-          tag: 8-jdk-alpine
-
-      inputs:
-        - name: chaos-lemur
-
-      outputs:
-        - name: chaos-lemur-deploy
-
-      run:
-        path: chaos-lemur/ci/package.sh
-
+        image_resource:
+          type: docker-image
+          source:
+            repository: openjdk
+            tag: 8-jdk-alpine
+        inputs:
+          - name: chaos-lemur
+        outputs:
+          - name: chaos-lemur-deploy
+        run:
+          path: chaos-lemur/ci/package.sh
     - put: pcf-app
-      inputs:
-        - name: chaos-lemur-deploy
-      params:
-        manifest: chaos-lemur-deploy/manifest.yml
+        inputs:
+          - name: chaos-lemur-deploy
+        params:
+          manifest: chaos-lemur-deploy/manifest.yml
