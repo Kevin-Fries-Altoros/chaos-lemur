@@ -20,15 +20,9 @@ parse_yaml() {
 
 cd chaos-lemur
 
-if [ -f ./ci/env.yml ]; then
-  eval $(parse_yaml ./ci/env.yml "env_")
-fi
-
 ./mvnw clean package
 
 cp manifest.* ../chaos-lemur-deploy
-if [ -n "${env_env}"]; then
-  echo "${env_env}" >> ../chaos-lemur-deploy/manifest.yml
-fi
+if [ -f ci/env.yml ]; then cat ci/env.yml >> ../chaos-lemur-deploy/manifest.yml; fi
 
 cp -r target ../chaos-lemur-deploy
